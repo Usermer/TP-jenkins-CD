@@ -5,7 +5,6 @@ pipeline {
         PYTHON_DIR = 'C:\\Users\\Pc\\AppData\\Local\\Programs\\Python\\Python311'
         PATH = "${PYTHON_DIR};${PYTHON_DIR}\\Scripts;${env.PATH}"
 
-        // URL de TELECHARGEMENT (et non l'URL de l'interface #browse)
         NEXUS_URL  = 'http://localhost:8081/repository/python-release/Release.zip'
         NEXUS_USER = 'admin'
         NEXUS_PASS = 'fd1c26ae-6590-46ec-942e-119fb06734d5'
@@ -21,8 +20,7 @@ pipeline {
 
         stage('Telechargement du fichier depuis Nexus') {
             steps {
-                // -o (minuscule) = nom du fichier de sortie ; --fail = echec si erreur HTTP
-                bat 'curl --fail -u %NEXUS_USR%:%NEXUS_PSW% -o Release.zip %NEXUS_URL%'
+                bat 'curl --fail -u %NEXUS_USER%:%NEXUS_PASS% -o Release.zip %NEXUS_URL%'
             }
         }
 
